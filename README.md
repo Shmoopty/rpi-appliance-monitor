@@ -27,7 +27,7 @@ You can receive tweets or PushBullet notifications when a device starts vibratin
 
 2. Mount the SD card on your computer.  There should be two partitions, a FAT32 **boot partition**, and an EXT3 **OS partition**.  On Mac or Windows, you may need to find a driver to see EXT3 partitions.
 
-3. Add an empty file named ssh to the **boot partition**.  This enables the ssh daemon.
+3. Add an empty file named `ssh` to the **boot partition**.  This enables the ssh daemon.
 
 4. Edit these files on the **OS partition**:
   * Edit /etc/hostname and /etc/hosts to change “raspberrypi” to a unique host name
