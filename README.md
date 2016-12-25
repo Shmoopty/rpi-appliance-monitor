@@ -25,7 +25,7 @@ You can receive tweets or PushBullet notifications when a device starts vibratin
 
 1. [Download Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/) and image it onto an SD card 
 
-2. Mount the SD card on a your computer.  There should be two partitions, a FAT32 **boot partition**, and an EXT3 **OS partition**.  On Mac or Windows, you may need to find a driver to see EXT3 partitions.
+2. Mount the SD card on your computer.  There should be two partitions, a FAT32 **boot partition**, and an EXT3 **OS partition**.  On Mac or Windows, you may need to find a driver to see EXT3 partitions.
 
 3. Add an empty file named ssh to the **boot partition**.  This enables the ssh daemon.
 
