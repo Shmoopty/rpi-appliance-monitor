@@ -58,7 +58,7 @@ Create the program file [`/home/pi/vibration.py`](https://raw.githubusercontent.
 
 Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration_settings.ini)
 
-* Create a PushBullet API key here:  https://www.pushbullet.com/#settings/account
+* Create a PushBullet Access Token key here:  https://www.pushbullet.com/#settings/account
 * Create Twitter API keys here (Steps 1-4): http://nodotcom.org/python-twitter-tutorial.html
 
 Edit `/etc/rc.local` To make the program run at boot.
