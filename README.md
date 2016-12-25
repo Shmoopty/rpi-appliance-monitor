@@ -3,7 +3,7 @@
 Get notified on your phone or desktop when appliances begin or end their cycles
 This device makes use of the nicely sensitive 801s vibration sensor.  It will detect faint shaking and if the shaking lasts a specified amount of time, it will assume that the appliance is running. 
 
-![Completed device](https://cloud.githubusercontent.com/assets/1101856/21469692/1143d1fa-ca27-11e6-9986-e12b9c23e189.jpg "Completed device")
+![On Phone](https://cloud.githubusercontent.com/assets/1101856/21469770/5d91e94e-ca2b-11e6-8c9c-d28eb902aefb.jpg "On Phone")
 
 This works on clothes washers and dryers, dishwashers, garage door openers, fans, furnaces, and other machines that vibrate.
 
