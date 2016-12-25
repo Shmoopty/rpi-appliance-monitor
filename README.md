@@ -46,7 +46,7 @@ You can receive tweets or PushBullet notifications when a device starts vibratin
 
 2. Add the WiFi dongle to Raspberry Pi USB port.  A Raspberry Pi Zero will need a microUSB adaptor.
 
-3. Add the 801s Vibration Sensor to Raspberry Pi GPIO pins.  The pins of my sensor line up perfectly with 5V, GND, GP14, GP15.  You can rest the pins in place initially.  When everything is working, solder or tape them into place.
+3. Add the 801s Vibration Sensor to [Raspberry Pi GPIO pins](https://pinout.xyz/).  The pins of my sensor line up perfectly with 5V, GND, GP14, GP15.  You can rest the pins in place initially.  When everything is working, solder or tape them into place.
 
 4. Plug in a power source, and you’re good to go.  Within a few seconds, you should be able to connect to the Pi with: “ssh pi@*{unique host name}*” (password: `raspberry`)
 
