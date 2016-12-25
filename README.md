@@ -50,7 +50,8 @@ You can receive tweets or PushBullet notifications when a device starts vibratin
 
 After you ssh to the pi, install a few essential libraries:
 
-    sudo pip install requests tweepy
+    $ sudo apt-get install python-pip
+    $ sudo pip install requests tweepy
 
 Create the program file [`/home/pi/vibration.py`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration.py) (Click to view)
 
