@@ -66,7 +66,7 @@ After you ssh to the pi, install a few essential libraries:
 Create the program file [`/home/pi/vibration.py`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration.py) (Click to view)
 
 
-Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration_settings.ini)
+Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration_settings.ini).  This file specifies what sensor pin to monitor, what messages you want, and what services to send the message to.
 
 * Create a PushBullet Access Token key here:  https://www.pushbullet.com/#settings/account
 * Create Twitter API keys here (Steps 1-4): http://nodotcom.org/python-twitter-tutorial.html
