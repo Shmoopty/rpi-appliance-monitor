@@ -41,6 +41,8 @@ You can receive tweets or PushBullet notifications when a device starts vibratin
     }
 ```
 
+Your OS should now be ready to boot and automatically jump on your home network!
+
 # Step 2: Create the hardware
 
 1. Insert the microSD card into the Raspberry Pi.
