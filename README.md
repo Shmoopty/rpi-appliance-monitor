@@ -76,6 +76,8 @@ Add before the `exit` line:
 
 You’re done!  Reboot and test it out.
 
+Some mounting tape will let you stick the device somewhere discrete on your appliance.
+
 If you’ve soldered the sensor pins, you can bend the sensor to be flush with the Pi.
 
 ![Completed device](https://cloud.githubusercontent.com/assets/1101856/21469692/1143d1fa-ca27-11e6-9986-e12b9c23e189.jpg "Completed device")
