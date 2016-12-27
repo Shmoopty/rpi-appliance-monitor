@@ -31,8 +31,8 @@ You can receive tweets or PushBullet notifications when a device starts vibratin
 3. Add an empty file named `ssh` to the **boot partition**.  This enables the ssh daemon.
 
 4. Edit these files on the **OS partition**:
-  * Edit /etc/hostname and /etc/hosts to change “raspberrypi” to a unique host name
-  * Edit /etc/wpa_supplicant/wpa_supplicant.conf to add your WiFi authentication:
+  * Edit `/etc/hostname` and `/etc/hosts` to change “raspberrypi” to a unique host name
+  * Edit `/etc/wpa_supplicant/wpa_supplicant.conf` to add your WiFi authentication:
 
 ```
     network={
