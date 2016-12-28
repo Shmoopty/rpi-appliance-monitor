@@ -1,6 +1,6 @@
 # Raspberry Pi Appliance Monitor
 
-*Get notified on your phone or desktop when appliances begin or end their cycles*
+*Create a device to get notified on your phone or desktop when appliances begin or end their cycles*
 
 This device makes use of the nicely sensitive 801s vibration sensor.  It will detect faint shaking and if the shaking lasts a specified amount of time, it will assume that the appliance is running. 
 
