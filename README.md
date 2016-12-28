@@ -31,7 +31,7 @@ You can receive tweets or PushBullet notifications when a device starts vibratin
 3. Add an empty file named `ssh` to the **boot partition**.  This enables the ssh daemon.
 
 4. Edit these files on the **OS partition**:
-  * Edit `/etc/hostname` and `/etc/hosts` to change “raspberrypi” to a unique host name
+  * Edit `/etc/hostname` and `/etc/hosts` to change “raspberrypi” to a **unique host name**
   * Edit `/etc/wpa_supplicant/wpa_supplicant.conf` to add your WiFi authentication:
 
 ```
@@ -51,7 +51,7 @@ Your OS should now be ready to boot and automatically jump on your home network!
 
 3. Add the 801s Vibration Sensor to [Raspberry Pi GPIO pins](https://pinout.xyz/).  The pins of my sensor line up perfectly with 5V, GND, GP14, GP15.  You can rest the pins in place initially.  When everything is working, solder or tape them into place.
 
-4. Plug in a power source, and you’re good to go.  Within a few seconds, you should be able to connect to the Pi with: “ssh pi@*{unique host name}*” (password: `raspberry`)
+4. Plug in a power source, and you’re good to go.  Within a few seconds, you should be able to connect to the Pi with: “ssh pi@*{**unique host name**}*” (password: `raspberry`)
 
 ![Sensor inserted](https://cloud.githubusercontent.com/assets/1101856/21469689/113ee280-ca27-11e6-979f-a2d7c1aeb3bb.jpg "Sensor inserted")
 
