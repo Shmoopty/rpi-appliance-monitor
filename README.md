@@ -62,9 +62,14 @@ After you ssh to the pi, install a few essential libraries:
 
     $ sudo apt-get install python-pip
     $ sudo pip install requests tweepy
+    
+Set the timezone to make sure timestamps are correct
+
+    $ sudo raspi-config
+    [Internationalisation Options]
+    [Change Timezone]
 
 Create the program file [`/home/pi/vibration.py`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration.py) (Click to view)
-
 
 Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration_settings.ini).  This file specifies what sensor pin to monitor, what messages you want, and what services to send the message to.
 
