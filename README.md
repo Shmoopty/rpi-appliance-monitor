@@ -86,7 +86,7 @@ Add before the `exit` line:
 
 You’re done!  Reboot and test it out.
 
-Some mounting tape will let you stick the device somewhere discrete on your appliance.
+Some mounting tape or Sugru will let you stick the device somewhere discrete on your appliance.
 
 If you’ve soldered the sensor pins, you can bend the sensor to be flush with the Pi.
 
