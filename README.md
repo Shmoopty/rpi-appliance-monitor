@@ -1,6 +1,6 @@
 # Raspberry Pi Appliance Monitor
 
-*Create a device to get notified on your phone or desktop when appliances begin or end their cycles*
+*Get notified on your phone or desktop when appliances begin or end their cycles*
 
 These instructions are for a simple Raspberry Pi project that can make any old appliance smart, without having to operate on the appliance.  Just stick this tiny monitor onto it!
 
