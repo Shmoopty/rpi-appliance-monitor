@@ -78,7 +78,7 @@ Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubu
 * If you want PushBullet notifications, create a PushBullet Access Token key here:  https://www.pushbullet.com/#settings/account
 * If you want Twitter notifications, create Twitter API keys here (Steps 1-4): http://nodotcom.org/python-twitter-tutorial.html
 
-Edit `/etc/rc.local` to make the program run at boot.
+Edit `/etc/rc.local` to make the program run when the device boots up.
 
 Add before the `exit` line:
 
