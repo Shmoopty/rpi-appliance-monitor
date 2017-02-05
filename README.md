@@ -17,7 +17,7 @@ You can receive tweets or PushBullet notifications when a device starts vibratin
 * A [Raspberry Pi Zero](https://www.raspberrypi.org/products/pi-zero/).  Or any Raspberry Pi.  (In the U.S., see if there's a Micro Center nearby.  They'll sell you one for a flat $5.)
 * Any old MicroSD card.  2GB is plenty.
 * A USB WiFi dongle (and a MicroUSB adapter if you choose the Pi Zero)
-* An [801s vibration sensor module](https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dcomputers&field-keywords=801s+vibration+sensor)
+* An [801s vibration sensor module]  You'll want one with a voltage, ground, and digital signal pin.  Mine has an extra analog sensor pin that I'm effectively ignoring.  (https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dcomputers&field-keywords=801s+vibration+sensor)
 * Any 1 amp microUSB power source (What most phones and tablets from the last 10 years use) 
 
 ![Parts](https://cloud.githubusercontent.com/assets/1101856/21469691/1141fa38-ca27-11e6-8c7e-c1d389709a06.jpg "Parts")
@@ -73,7 +73,7 @@ Set the timezone to make sure timestamps are correct
 
 Create the program file [`/home/pi/vibration.py`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration.py) (Click to view)
 
-Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration_settings.ini).  This file specifies what sensor pin to monitor, what messages you want, and what services to send the message to.
+Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration_settings.ini).  This file specifies what sensor pin to monitor, what messages you want, and what services to send the message to. 
 
 * Create a PushBullet Access Token key here:  https://www.pushbullet.com/#settings/account
 * Create Twitter API keys here (Steps 1-4): http://nodotcom.org/python-twitter-tutorial.html
