@@ -17,7 +17,7 @@ You can receive tweets or PushBullet notifications when a device starts vibratin
 * A [Raspberry Pi Zero](https://www.raspberrypi.org/products/pi-zero/).  Or any Raspberry Pi.  (In the U.S., see if there's a Micro Center nearby.  They'll sell you one for a flat $5.)
 * Any old MicroSD card.  2GB is plenty.
 * A USB WiFi dongle (and a MicroUSB adapter if you choose the Pi Zero)
-* An [801s vibration sensor module](https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dcomputers&field-keywords=801s+vibration+sensor)   You'll want one with a **voltage**, **ground**, and **digital signal pin**.  Mine has an extra analog sensor pin that I'm effectively ignoring.  
+* An [801s vibration sensor module](https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dcomputers&field-keywords=801s+vibration+sensor)   You'll want one with a **voltage** (+V), **ground** (-V), and **digital signal pin**.  Mine has an extra analog sensor pin that I'm effectively ignoring.  
 * Any 1 amp microUSB power source (What most phones and tablets from the last 10 years use) 
 
 ![Parts](https://cloud.githubusercontent.com/assets/1101856/21469691/1141fa38-ca27-11e6-8c7e-c1d389709a06.jpg "Parts")
