@@ -49,7 +49,7 @@ Your OS should now be ready to boot and automatically jump on your home network!
 
 1. Insert the microSD card into the Raspberry Pi.
 
-2. Add the WiFi dongle to Raspberry Pi USB port.  A Raspberry Pi Zero will need a microUSB adaptor.
+2. Add the WiFi dongle to Raspberry Pi USB port.  A Raspberry Pi Zero will need a [microUSB adaptor](https://www.amazon.com/gp/product/B015GZOHKW/).
 
 3. Add the 801s Vibration Sensor to [Raspberry Pi GPIO pins](https://pinout.xyz/).  The pins of my sensor line up perfectly with 5V, GND, and GP14.  I'll be ignoring the analog pin that found its way into GP15.  You can rest the pins in place initially.  When everything is working, solder or tape them into place.
 
