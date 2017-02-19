@@ -63,7 +63,7 @@ Your OS should now be ready to boot and automatically jump on your home network!
 After you ssh to the pi, install a few essential libraries:
 
     $ sudo apt-get install python-pip
-    $ sudo pip install requests tweepy
+    $ sudo pip install requests tweepy slackclient
     
 Set the timezone to make sure timestamps are correct
 
@@ -77,6 +77,7 @@ Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubu
 
 * If you want PushBullet notifications, create a PushBullet Access Token key here:  https://www.pushbullet.com/#settings/account
 * If you want Twitter notifications, create Twitter API keys here (Steps 1-4): http://nodotcom.org/python-twitter-tutorial.html
+* If you want slack notifications, create a bot user: https://api.slack.com/bot-users
 
 Edit `/etc/rc.local` to make the program run when the device boots up.
 

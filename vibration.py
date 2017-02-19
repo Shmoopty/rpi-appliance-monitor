@@ -2,11 +2,13 @@ import sys
 import time
 import threading
 import RPi.GPIO as GPIO
-import tweepy
 import requests
 import json
-from ConfigParser import SafeConfigParser
 from time import gmtime, strftime
+
+from ConfigParser import SafeConfigParser
+from tweepy import OAuthHandler as TweetHandler
+from slackclient import SlackClient
 
 
 def pushbullet(cfg, msg):
@@ -26,10 +28,22 @@ def pushbullet(cfg, msg):
 def tweet(msg):
     try:
         tweet = msg + ' ' + strftime("%Y-%m-%d %H:%M:%S", gmtime())
-        auth = tweepy.OAuthHandler(twitter_api_key, twitter_api_secret)
+        auth = TweetHandler(twitter_api_key, twitter_api_secret)
         auth.set_access_token(twitter_access_token,
                               twitter_access_token_secret)
         tweepy.API(auth).update_status(status=tweet)
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except:
+        pass
+
+
+def slack(msg):
+    try:
+        slack = msg + ' ' + strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        sc = SlackClient(slack_api_token)
+        sc.api_call(
+            'chat.postMessage', channel='#random', text=slack)
     except (KeyboardInterrupt, SystemExit):
         raise
     except:
@@ -45,6 +59,8 @@ def send_alert(message):
             pushbullet(pushbullet_api_key2, message)
         if len(twitter_api_key) > 0:
             tweet(message)
+        if len(slack_api_token) > 0:
+            slack(message)
 
 
 def send_appliance_active_message():
@@ -107,6 +123,7 @@ twitter_api_key = config.get('twitter', 'api_key')
 twitter_api_secret = config.get('twitter', 'api_secret')
 twitter_access_token = config.get('twitter', 'access_token')
 twitter_access_token_secret = config.get('twitter', 'access_token_secret')
+slack_api_token = config.get('slack', 'api_token')
 send_alert(config.get('main', 'BOOT_MESSAGE'))
 
 GPIO.setwarnings(False)
