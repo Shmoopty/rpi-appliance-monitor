@@ -10,7 +10,7 @@ Raspberry Pi Appliance Monitor makes use of the nicely sensitive 801s vibration 
 
 This works on clothes washers and dryers, dishwashers, garage door openers, fans, furnaces, and other machines that vibrate.
 
-You can receive tweets or PushBullet notifications when a device starts vibrating or when it stops.
+You can receive **Tweets**, **Slack** messages, or or **PushBullet** notifications when a device starts vibrating or when it stops.
 
 ## Needed parts:
 
@@ -77,7 +77,7 @@ Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubu
 
 * If you want PushBullet notifications, create a PushBullet Access Token key here:  https://www.pushbullet.com/#settings/account
 * If you want Twitter notifications, create Twitter API keys here (Steps 1-4): http://nodotcom.org/python-twitter-tutorial.html
-* If you want slack notifications, create a bot user: https://api.slack.com/bot-users
+* If you want Slack notifications, create a bot user: https://api.slack.com/bot-users
 
 Edit `/etc/rc.local` to make the program run when the device boots up.
 
