@@ -1,6 +1,6 @@
 # Raspberry Pi Appliance Monitor
 
-_Get **Tweets**, **Slack** messages, or or **PushBullet** notifications when appliances begin or end their cycles_
+_Get **Tweets**, **Slack** messages, or **PushBullet** notifications when appliances begin or end their cycles_
 
 These instructions are for a simple Raspberry Pi project that can make any old appliance smart, without having to operate on the appliance.  Just stick this tiny monitor onto it!
 
