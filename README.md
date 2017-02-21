@@ -1,6 +1,6 @@
 # Raspberry Pi Appliance Monitor
 
-*Get notified on your phone or desktop when appliances begin or end their cycles*
+*Get **Tweets**, **Slack** messages, or or **PushBullet** notifications when appliances begin or end their cycles*
 
 These instructions are for a simple Raspberry Pi project that can make any old appliance smart, without having to operate on the appliance.  Just stick this tiny monitor onto it!
 
@@ -9,8 +9,6 @@ Raspberry Pi Appliance Monitor makes use of the nicely sensitive 801s vibration 
 ![On Phone](https://cloud.githubusercontent.com/assets/1101856/21469770/5d91e94e-ca2b-11e6-8c9c-d28eb902aefb.jpg "On Phone")
 
 This works on clothes washers and dryers, dishwashers, garage door openers, fans, furnaces, and other machines that vibrate.
-
-You can receive **Tweets**, **Slack** messages, or or **PushBullet** notifications when a device starts vibrating or when it stops.
 
 ## Needed parts:
 
