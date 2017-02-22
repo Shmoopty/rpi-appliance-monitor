@@ -50,6 +50,7 @@ Your OS should now be ready to boot and automatically jump on your home network!
 2. Add the WiFi dongle to Raspberry Pi USB port.  A Raspberry Pi Zero will need a [microUSB adaptor](https://www.amazon.com/gp/product/B015GZOHKW/).
 
 3. Add the 801s Vibration Sensor to [Raspberry Pi GPIO pins](https://pinout.xyz/).  The pins of my sensor line up perfectly with 5V, GND, and GP14.  I'll be ignoring the analog pin that found its way into GP15.  You can rest the pins in place initially.  When everything is working, solder or tape them into place.
+> Multiple sensor expert mode: Connect additional vibration modules to the same (or any) 5V and GND pins, but a different sensor GPIO pin. You'll want to use a very flexible or long cable, so one vibrating sensor doesn't vibrate everything.
 
 4. Plug in a power source, and you’re good to go.  Within a few seconds, you should be able to connect to the Pi with: “ssh pi@*{**unique host name**}*” (password: `raspberry`)
 
@@ -73,6 +74,8 @@ Create the program file [`/home/pi/vibration.py`](https://raw.githubusercontent.
 
 Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration_settings.ini).  This file specifies what sensor pin to monitor, what messages you want, and what services to send the message to. 
 
+> Multiple sensor expert mode: Create additional settings files with their own timings, messages, and unique sensor pins.
+
 * If you want PushBullet notifications, create a PushBullet Access Token key here:  https://www.pushbullet.com/#settings/account
 * If you want Twitter notifications, create Twitter API keys here (Steps 1-4): http://nodotcom.org/python-twitter-tutorial.html
 * If you want Slack notifications, create a bot user: https://api.slack.com/bot-users
@@ -82,6 +85,8 @@ Edit `/etc/rc.local` to make the program run when the device boots up.
 Add before the `exit` line:
 
     python /home/pi/vibration.py /home/pi/vibration_settings.ini &
+
+> Multiple sensor expert mode: Add and additional line for each additional sensor. One for each settings file.
 
 You’re done!  Reboot and test it out.
 
