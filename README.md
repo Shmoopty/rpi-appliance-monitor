@@ -76,9 +76,9 @@ Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubu
 
 > Multiple sensor expert mode: Create additional settings files with their own timings, messages, and unique sensor pins.  One for each sensor.
 
-* If you want PushBullet notifications, create a PushBullet Access Token key here:  https://www.pushbullet.com/#settings/account
-* If you want Twitter notifications, create Twitter API keys here (Steps 1-4): http://nodotcom.org/python-twitter-tutorial.html
-* If you want Slack notifications, create a bot user: https://api.slack.com/bot-users **or** create a Slack webhook https://api.slack.com/incoming-webhooks
+* If you want PushBullet notifications, [create a PushBullet Access Token key here](https://www.pushbullet.com/#settings/account)
+* If you want Twitter notifications, [create Twitter API keys here](http://nodotcom.org/python-twitter-tutorial.html) (Steps 1-4): 
+* If you want Slack notifications, [create a bot user](https://api.slack.com/bot-users) **or** [create a Slack webhook](https://api.slack.com/incoming-webhooks)
 * If you want an IFTTT trigger, create a new trigger with the Maker channel and note the channel and key.
 
 Edit `/etc/rc.local` to make the program run when the device boots up.
