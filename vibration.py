@@ -5,11 +5,11 @@ import RPi.GPIO as GPIO
 import requests
 import json
 from time import gmtime, strftime
+import urllib
 
 from ConfigParser import SafeConfigParser
 from tweepy import OAuthHandler as TweetHandler
 from slackclient import SlackClient
-
 
 def pushbullet(cfg, msg):
     try:
@@ -24,6 +24,29 @@ def pushbullet(cfg, msg):
     except:
         pass
 
+
+def iftt(msg):
+    try:
+        iftt_url = "https://maker.ifttt.com/trigger/{}/with/key/{}".format(iftt_maker_channel_event,
+                                                                           iftt_maker_channel_key)
+        report = {"value1" : msg}
+        resp = requests.post(iftt_url, data=report)
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except:
+        pass
+
+def slack_webhook(msg):
+
+    try:
+        payload = urllib.urlencode({'payload': '{"text": "' + msg+ '"}'})
+        headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
+        response = requests.request("POST", slack_webhook , data=payload, headers=headers)
+
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except:
+        pass
 
 def tweet(msg):
     try:
@@ -61,6 +84,10 @@ def send_alert(message):
             tweet(message)
         if len(slack_api_token) > 0:
             slack(message)
+        if len (slack_webhook) > 0:
+            slack_webhook(message)
+        if len(iftt_maker_channel_key) > 0:
+            iftt(message)
 
 
 def send_appliance_active_message():
@@ -124,6 +151,10 @@ twitter_api_secret = config.get('twitter', 'api_secret')
 twitter_access_token = config.get('twitter', 'access_token')
 twitter_access_token_secret = config.get('twitter', 'access_token_secret')
 slack_api_token = config.get('slack', 'api_token')
+slack_webhook = config.get('slack','webhook_url')
+iftt_maker_channel_event = config.get('iftt','maker_channel_event')
+iftt_maker_channel_key = config.get('iftt','maker_channel_key')
+
 send_alert(config.get('main', 'BOOT_MESSAGE'))
 
 GPIO.setwarnings(False)
