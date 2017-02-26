@@ -1,6 +1,6 @@
 # Raspberry Pi Appliance Monitor
 
-_Get **Tweets**, **Slack** messages, or **PushBullet** notifications when appliances begin or end their cycles_
+_Get **Tweets**, **Slack** messages, **PushBullet** notifications, or **IFTTT triggers** when appliances begin or end their cycles_
 
 These instructions are for a simple Raspberry Pi project that can make any old appliance smart, without having to operate on the appliance.  Just stick this tiny monitor onto it!
 
@@ -78,7 +78,8 @@ Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubu
 
 * If you want PushBullet notifications, create a PushBullet Access Token key here:  https://www.pushbullet.com/#settings/account
 * If you want Twitter notifications, create Twitter API keys here (Steps 1-4): http://nodotcom.org/python-twitter-tutorial.html
-* If you want Slack notifications, create a bot user: https://api.slack.com/bot-users
+* If you want Slack notifications, create a bot user: https://api.slack.com/bot-users **or** create a Slack webhook https://api.slack.com/incoming-webhooks
+* If you want an IFTTT trigger, create a new trigger with the Maker channel and note the channel and key.
 
 Edit `/etc/rc.local` to make the program run when the device boots up.
 
