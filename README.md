@@ -14,8 +14,8 @@ This works on clothes washers and dryers, dishwashers, garage door openers, fans
 
 * A [Raspberry Pi Zero](https://www.raspberrypi.org/products/pi-zero/).  Or any Raspberry Pi.  (In the U.S., see if there's a Micro Center nearby.  They'll sell you a single Zero at cost.)
 * Any old MicroSD card.  2GB is plenty.
-* WiFi!  A Raspberry Pi A/B/2 will need a USB WiFi dongle.  My classic Pi Zero needs a dongle **and** a MicroUSB adapter.  If you have a Raspberry Pi 3 or Raspberry Pi Zero W, you already have WiFi.
-* An [801s vibration sensor module](https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dcomputers&field-keywords=801s+vibration+sensor)   You'll want one with a **voltage** (+V), **ground** (-V), and **digital signal pin**.  Mine has an extra analog sensor pin that I'm effectively ignoring.  
+* WiFi...  A Raspberry Pi A/B/2 will need a USB WiFi dongle.  My classic Pi Zero needs a dongle **and** a MicroUSB adapter.  If you have a Raspberry Pi 3 or Raspberry Pi Zero W, you already have WiFi.
+* An [801s vibration sensor module](https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dcomputers&field-keywords=801s+vibration+sensor)   You'll want one with a **voltage** (+V), **ground** (-V), and **digital signal pin**.  Mine has an extra analog sensor pin that I'm effectively ignoring.  Pi doesn't do analog easily.
 * Any 1 amp microUSB power source (What most phones and tablets from the last 10 years use) 
 
 ![Parts](https://cloud.githubusercontent.com/assets/1101856/21469691/1141fa38-ca27-11e6-8c7e-c1d389709a06.jpg "Parts")
@@ -28,10 +28,10 @@ This works on clothes washers and dryers, dishwashers, garage door openers, fans
 
 2. Mount the SD card on your computer.  There should be two partitions, a FAT32 **boot partition**, and an EXT3 **OS partition**.  On [Mac](https://osxfuse.github.io/) or [Windows](http://www.chrysocome.net/explore2fs), you may need to find a driver to see EXT3 partitions (see links).
 
-3. Add an empty file named `ssh` to the **boot partition**.  This enables the ssh daemon.
+3. Add an empty file named `ssh` to the **boot partition**.  This enables the ssh daemon when it boots.
 
 4. Edit these files on the **OS partition**:
-  * Edit `/etc/hostname` and `/etc/hosts` to change “raspberrypi” to a **unique host name**
+  * Edit `/etc/hostname` and `/etc/hosts` to change “raspberrypi” to a **unique host name**, like `dryerpi`.
   * Edit `/etc/wpa_supplicant/wpa_supplicant.conf` to add your WiFi authentication:
 
 ```
@@ -50,7 +50,7 @@ Your OS should now be ready to boot and automatically jump on your home network!
 2. Add the WiFi dongle to Raspberry Pi USB port.  A Raspberry Pi Zero will need a [microUSB adaptor](https://www.amazon.com/gp/product/B015GZOHKW/).
 
 3. Add the 801s Vibration Sensor to [Raspberry Pi GPIO pins](https://pinout.xyz/).  The pins of my sensor line up perfectly with 5V, GND, and GP14.  I'll be ignoring the analog pin that found its way into GP15.  You can rest the pins in place initially.  When everything is working, solder or tape them into place.
-> Multiple sensor expert mode: Connect additional vibration modules to the same (or any) 5V and GND pins, but a different sensor GPIO pin. You'll want to use a very flexible or long cable, so one vibrating sensor doesn't vibrate everything.
+> Multiple sensor expert mode: Connect additional vibration modules to the same (or any) 5V and GND pins, but a different sensor GPIO pin. You'll want to use a very flexible or long cable, so one vibrating sensor doesn't shake everything.
 
 4. Plug in a power source, and you’re good to go.  Within a few seconds, you should be able to connect to the Pi with: “ssh pi@*{**unique host name**}*” (password: `raspberry`)
 
@@ -87,7 +87,7 @@ Add before the `exit` line:
 
     python /home/pi/vibration.py /home/pi/vibration_settings.ini &
 
-> Multiple sensor expert mode: Add and additional line for each additional sensor. One for each settings file.
+> Multiple sensor expert mode: Add and additional line for each additional sensor. One for each of the settings files you created.
 
 You’re done!  Reboot and test it out.
 
@@ -96,4 +96,16 @@ Some mounting tape or Sugru will let you stick the device somewhere discrete on 
 If you’ve soldered the sensor pins, you can bend the sensor to be flush with the Pi.
 
 ![Completed device](https://cloud.githubusercontent.com/assets/1101856/21469692/1143d1fa-ca27-11e6-9986-e12b9c23e189.jpg "Completed device")
+
+# Optional tuning that you can probably skip over
+
+### If your monitor is too sensitive and triggers when someone is just walking around the house:
+
+Look for a potentiometer that looks like a screw head on your 801s sensor.  Give it a little twist _(probably in the "unscrew" direction)_ to make it less touchy.  If that doesn't help, read on...
+
+### If your monitor triggers multiple events during one appliance usage:
+
+Your appliance may have a rest cycle.  Modify your settings file to change `seconds_to_end` to a larger number.  It should be longer than the rest cycle.
+
+
 
