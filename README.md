@@ -2,7 +2,7 @@
 
 _Get **Tweets**, **Slack** messages, **PushBullet** notifications, or **IFTTT triggers** when appliances begin or end their cycles_
 
-These instructions are for a simple Raspberry Pi project that can make any old appliance smart, without having to operate on the appliance.  Just stick this tiny monitor onto it!
+**Raspberry Pi Appliance Monitor** just sticks onto an appliance, so no damage is done, no warranties are voided.  (That makes it Landlord Safe!)
 
 Raspberry Pi Appliance Monitor makes use of the nicely sensitive 801s vibration sensor.  It will detect faint shaking and if the shaking lasts a specified amount of time, it will assume that the appliance is running. 
 
