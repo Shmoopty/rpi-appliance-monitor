@@ -4,7 +4,7 @@ import threading
 import RPi.GPIO as GPIO
 import requests
 import json
-from time import gmtime, strftime
+from time import localtime, strftime
 import urllib
 
 from ConfigParser import SafeConfigParser
@@ -50,7 +50,7 @@ def slack_webhook(msg):
 
 def tweet(msg):
     try:
-        tweet = msg + ' ' + strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        tweet = msg + ' ' + strftime("%Y-%m-%d %H:%M:%S", localtime())
         auth = TweetHandler(twitter_api_key, twitter_api_secret)
         auth.set_access_token(twitter_access_token,
                               twitter_access_token_secret)
@@ -63,7 +63,7 @@ def tweet(msg):
 
 def slack(msg):
     try:
-        slack = msg + ' ' + strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        slack = msg + ' ' + strftime("%Y-%m-%d %H:%M:%S", localtime())
         sc = SlackClient(slack_api_token)
         sc.api_call(
             'chat.postMessage', channel='#random', text=slack)
