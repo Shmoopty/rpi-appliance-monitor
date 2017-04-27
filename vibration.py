@@ -50,6 +50,8 @@ def slack_webhook(msg):
 
 def tweet(msg):
     try:
+        # Twitter is the only API that NEEDS something like a timestamp,
+        # since it will reject identical tweets.
         tweet = msg + ' ' + strftime("%Y-%m-%d %H:%M:%S", localtime())
         auth = TweetHandler(twitter_api_key, twitter_api_secret)
         auth.set_access_token(twitter_access_token,
