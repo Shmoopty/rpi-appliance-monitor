@@ -52,7 +52,11 @@ Your OS should now be ready to boot and automatically jump on your home network!
 3. Add the 801s Vibration Sensor to [Raspberry Pi GPIO pins](https://pinout.xyz/).  The pins of my sensor line up perfectly with 5V, GND, and GP14.  I'll be ignoring the analog pin that found its way into GP15.  You can rest the pins in place initially.  When everything is working, solder or tape them into place.
 > Multiple sensor expert mode: Connect additional vibration modules to the same (or any) 5V and GND pins, but a different sensor GPIO pin. You'll want to use a very flexible or long cable, so one vibrating sensor doesn't shake everything.
 
-4. Plug in a power source, and you’re good to go.  Within a few seconds, you should be able to connect to the Pi with: “ssh pi@*{**unique host name**}*” (password: `raspberry`)
+4. Plug in a power source, and you’re good to go.  Within a few seconds, you should be able to connect to the Pi with:
+
+    `ssh pi@{unique host name}`
+    
+(password: `raspberry`)
 
 ![Sensor inserted](https://cloud.githubusercontent.com/assets/1101856/21469689/113ee280-ca27-11e6-979f-a2d7c1aeb3bb.jpg "Sensor inserted")
 
