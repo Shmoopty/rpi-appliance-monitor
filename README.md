@@ -24,7 +24,7 @@ This works on clothes washers and dryers, dishwashers, garage door openers, fans
 
 > *Note*: We can skip plugging the Pi into a TV and keyboard by configuring the SD card directly from your computer. If you'd rather do this directly from the booted Pi, that works too!
 
-1. [Download Raspbian Jessie Lite](https://www.raspberrypi.org/downloads/raspbian/) and image it onto an SD card 
+1. [Download Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/) and image it onto an SD card 
 
 2. Mount the SD card on your computer.  There should be two partitions, a FAT32 **boot partition**, and an EXT3 **OS partition**.  On [Mac](https://osxfuse.github.io/) or [Windows](http://www.chrysocome.net/explore2fs), you may need to find a driver to see EXT3 partitions (see links).
 
