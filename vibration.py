@@ -4,6 +4,7 @@ import threading
 import RPi.GPIO as GPIO
 import requests
 import json
+import tweepy
 from time import localtime, strftime
 import urllib
 
