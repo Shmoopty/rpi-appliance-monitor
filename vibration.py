@@ -4,6 +4,7 @@ import threading
 import RPi.GPIO as GPIO
 import requests
 import json
+import tweepy
 from time import localtime, strftime
 import urllib
 
@@ -37,6 +38,7 @@ def iftt(msg):
         pass
 
 def slack_webhook(msg):
+
     try:
         payload = urllib.urlencode({'payload': '{"text": "' + msg+ '"}'})
         headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
@@ -90,44 +92,42 @@ def send_alert(message):
         if len(iftt_maker_channel_key) > 0:
             iftt(message)
 
-def sensor_switch(x):
-    global last_signal_on_time
-    global sensor_on
-    sensor_on = GPIO.input(sensor_pin)
-    if (sensor_on):
-        print 'Sensor ON'
-        last_signal_on_time = time.time()
-    else:
-        print 'Sensor OFF'
-        last_signal_off_time = time.time()
+
+def send_appliance_active_message():
+    send_alert(start_message)
+    global appliance_active
+    appliance_active = True
+
+
+def send_appliance_inactive_message():
+    send_alert(end_message)
+    global appliance_active
+    appliance_active = False
+
+
+def vibrated(x):
+    global vibrating
+    global last_vibration_time
+    global start_vibration_time
+    print 'Vibrated'
+    last_vibration_time = time.time()
+    if not vibrating:
+        start_vibration_time = last_vibration_time
+        vibrating = True
 
 
 def heartbeat():
-    global appliance_active
-    global last_quiet_time
-    global sensor_on
     print 'HB'
-
     current_time = time.time()
-
-    # Test if there's been any quiet lately
-    if ( not sensor_on and current_time - last_signal_on_time > 1):
-        last_quiet_time = current_time
-
-    # Test for appliance off
-    if (appliance_active):
-        # If there hasn't been an on signal for a while
-        if (current_time - last_signal_on_time > end_seconds):
-            appliance_active = False
-            send_alert(end_message)
-
-    # Test for appliance on
-    else:
-        # If there hasn't been a quiet period for a while
-        if (current_time - last_quiet_time > begin_seconds):
-            appliance_active = True
-            send_alert(start_message)
-
+    global vibrating
+    delta_vibration = last_vibration_time - start_vibration_time
+    if (vibrating and delta_vibration > begin_seconds
+            and not appliance_active):
+        send_appliance_active_message()
+    if (not vibrating and appliance_active
+            and current_time - last_vibration_time > end_seconds):
+        send_appliance_inactive_message()
+    vibrating = current_time - last_vibration_time < 2
     threading.Timer(1, heartbeat).start()
 
 
@@ -135,11 +135,10 @@ if len(sys.argv) == 1:
     print "No config file specified"
     sys.exit()
 
+vibrating = False
 appliance_active = False
-sensor_on = False
-last_signal_on_time = time.time()
-last_signal_off_time = time.time()
-last_quiet_time = time.time()
+last_vibration_time = time.time()
+start_vibration_time = last_vibration_time
 
 config = SafeConfigParser()
 config.read(sys.argv[1])
@@ -164,8 +163,10 @@ send_alert(config.get('main', 'BOOT_MESSAGE'))
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(sensor_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.add_event_detect(sensor_pin, GPIO.BOTH, callback=sensor_switch)
+GPIO.add_event_detect(sensor_pin, GPIO.RISING)
+GPIO.add_event_callback(sensor_pin, vibrated)
 
 print 'Running config file {} monitoring GPIO pin {}'\
       .format(sys.argv[1], str(sensor_pin))
 threading.Timer(1, heartbeat).start()
+
