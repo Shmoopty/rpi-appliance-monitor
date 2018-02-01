@@ -1,6 +1,6 @@
 # Raspberry Pi Appliance Monitor
 
-_Get **Tweets**, **Slack** messages, **PushBullet** notifications, or **IFTTT triggers** when appliances begin or end their cycles_
+_Get **Tweets**, **Slack** messages, **Pushover** notifications, **PushBullet** notifications, or **IFTTT triggers** when appliances begin or end their cycles_
 
 **Raspberry Pi Appliance Monitor** just sticks onto an appliance, so no damage is done, no warranties are voided.  (That makes it Landlord Safe!)
 

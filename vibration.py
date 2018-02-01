@@ -25,6 +25,17 @@ def pushbullet(cfg, msg):
     except:
         pass
 
+def pushover(user_key, app_key, msg):
+    try:
+        data_send = {"user": user_key, "token": app_key, "message": msg}
+        requests.post(
+            'https://api.pushover.net/1/messages.json',
+            data=json.dumps(data_send),
+            headers={'Content-Type': 'application/json'})
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except:
+        pass
 
 def iftt(msg):
     try:
@@ -79,6 +90,8 @@ def slack(msg):
 def send_alert(message):
     if len(message) > 1:
         print message
+        if len(pushover_user_key) > 0 and len(pushover_app_key) > 0:
+            pushover(pushover_user_key, pushover_app_key, message)
         if len(pushbullet_api_key) > 0:
             pushbullet(pushbullet_api_key, message)
         if len(pushbullet_api_key2) > 0:
@@ -117,8 +130,8 @@ def vibrated(x):
 
 
 def heartbeat():
-    print 'HB'
     current_time = time.time()
+    print "HB at {}".format(current_time)
     global vibrating
     delta_vibration = last_vibration_time - start_vibration_time
     if (vibrating and delta_vibration > begin_seconds
@@ -146,6 +159,10 @@ sensor_pin = config.getint('main', 'SENSOR_PIN')
 begin_seconds = config.getint('main', 'SECONDS_TO_START')
 end_seconds = config.getint('main', 'SECONDS_TO_END')
 pushbullet_api_key = config.get('pushbullet', 'API_KEY')
+
+pushover_user_key = config.get('pushover', 'user_api_key')
+pushover_app_key = config.get('pushover', 'app_api_key')
+
 pushbullet_api_key2 = config.get('pushbullet', 'API_KEY2')
 start_message = config.get('main', 'START_MESSAGE')
 end_message = config.get('main', 'END_MESSAGE')
