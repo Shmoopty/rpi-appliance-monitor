@@ -104,6 +104,9 @@ def send_alert(message):
             slack_webhook(message)
         if len(iftt_maker_channel_key) > 0:
             iftt(message)
+        if len(mqtt_topic) > 0:
+            mqtt(message)
+            
 
 
 def send_appliance_active_message():
