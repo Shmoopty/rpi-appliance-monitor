@@ -70,7 +70,7 @@ After you ssh to the pi, install a few essential libraries:
 
 For MQTT you need paho-mqtt library:
 
-    $ sudo pip install paho-mqtt
+    $ sudo pip install paho-mqtt
     
 Set the timezone to make sure timestamps are correct
 
