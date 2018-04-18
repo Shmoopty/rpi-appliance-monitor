@@ -15,6 +15,10 @@ from slackclient import SlackClient
 
 def mqtt(msg):
     try:
+        mqtt_auth = None
+        if len(mqtt_username) > 0:
+            mqtt_auth = { 'username': mqtt_username, 'password': mqtt_password }
+        
         mqttpublish.single(mqtt_topic, msg, qos=0, retain=False, hostname=mqtt_hostname,
         port=mqtt_port, client_id=mqtt_clientid, keepalive=60, will=None, auth=mqtt_auth,
         tls=None)
@@ -178,7 +182,8 @@ pushover_app_key = config.get('pushover', 'app_api_key')
 mqtt_hostname = config.get('mqtt', 'mqtt_hostname')
 mqtt_port = config.get('mqtt', 'mqtt_port')
 mqtt_topic = config.get('mqtt', 'mqtt_topic')
-mqtt_auth = config.get('mqtt', 'mqtt_auth')
+mqtt_username = config.get('mqtt', 'mqtt_username')
+mqtt_password = config.get('mqtt', 'mqtt_password')
 mqtt_clientid = config.get('mqtt', 'mqtt_clientid')
 
 pushbullet_api_key2 = config.get('pushbullet', 'API_KEY2')
