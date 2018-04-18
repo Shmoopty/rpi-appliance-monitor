@@ -16,7 +16,7 @@ from slackclient import SlackClient
 def mqtt(msg):
     try:
         mqttpublish.single(mqtt_topic, msg, qos=0, retain=False, hostname=mqtt_hostname,
-        port=mqtt_port, client_id=mqtt_clientid, keepalive=60, will=None, auth=auth,
+        port=mqtt_port, client_id=mqtt_clientid, keepalive=60, will=None, auth=mqtt_auth,
         tls=None)
     except (KeyboardInterrupt, SystemExit):
         raise
