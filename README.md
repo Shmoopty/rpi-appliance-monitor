@@ -84,6 +84,7 @@ Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubu
 * If you want Twitter notifications, [create Twitter API keys here](http://nodotcom.org/python-twitter-tutorial.html) (Steps 1-4): 
 * If you want Slack notifications, [create a bot user](https://api.slack.com/bot-users) **or** [create a Slack webhook](https://api.slack.com/incoming-webhooks)
 * If you want an IFTTT trigger, create a new trigger with the Maker channel and note the channel and key.
+* If you want MQTT triggers, fill in MQTT configuration under [mqtt] section.
 
 Edit `/etc/rc.local` to make the program run when the device boots up.
 
