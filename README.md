@@ -67,6 +67,10 @@ After you ssh to the pi, install a few essential libraries:
 
     $ sudo apt-get install python-pip
     $ sudo pip install requests tweepy slackclient
+
+For MQTT you need paho-mqtt library:
+
+    $ sudo pip install paho-mqtt
     
 Set the timezone to make sure timestamps are correct
 
