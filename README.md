@@ -1,6 +1,6 @@
 # Raspberry Pi Appliance Monitor
 
-_Get **Tweets**, **Slack** messages, **Pushover** notifications, **PushBullet** notifications, or **IFTTT triggers** when appliances begin or end their cycles_
+_Get **Tweets**, **Slack** messages, **Pushover** notifications, **PushBullet** notifications, **MQTT** notifications, or **IFTTT triggers** when appliances begin or end their cycles_
 
 **Raspberry Pi Appliance Monitor** just sticks onto an appliance, so no damage is done, no warranties are voided.  (That makes it Landlord Safe!)
 
@@ -67,6 +67,10 @@ After you ssh to the pi, install a few essential libraries:
 
     $ sudo apt-get install python-pip
     $ sudo pip install requests tweepy slackclient
+
+For MQTT you need paho-mqtt library:
+
+    $ sudo pip install paho-mqtt
     
 Set the timezone to make sure timestamps are correct
 
@@ -84,6 +88,7 @@ Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubu
 * If you want Twitter notifications, [create Twitter API keys here](http://nodotcom.org/python-twitter-tutorial.html) (Steps 1-4): 
 * If you want Slack notifications, [create a bot user](https://api.slack.com/bot-users) **or** [create a Slack webhook](https://api.slack.com/incoming-webhooks)
 * If you want an IFTTT trigger, create a new trigger with the Maker channel and note the channel and key.
+* If you want MQTT triggers, fill in MQTT configuration under [mqtt] section.
 
 Edit `/etc/rc.local` to make the program run when the device boots up.
 

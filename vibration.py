@@ -7,10 +7,25 @@ import json
 import tweepy
 from time import localtime, strftime
 import urllib
+import paho.mqtt.publish as mqttpublish
 
 from ConfigParser import SafeConfigParser
 from tweepy import OAuthHandler as TweetHandler
 from slackclient import SlackClient
+
+def mqtt(msg):
+    try:
+        mqtt_auth = None
+        if len(mqtt_username) > 0:
+            mqtt_auth = { 'username': mqtt_username, 'password': mqtt_password }
+        
+        mqttpublish.single(mqtt_topic, msg, qos=0, retain=False, hostname=mqtt_hostname,
+        port=mqtt_port, client_id=mqtt_clientid, keepalive=60, will=None, auth=mqtt_auth,
+        tls=None)
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except:  
+        pass
 
 def pushbullet(cfg, msg):
     try:
@@ -104,7 +119,8 @@ def send_alert(message):
             slack_webhook(message)
         if len(iftt_maker_channel_key) > 0:
             iftt(message)
-
+        if len(mqtt_topic) > 0:
+            mqtt(message) 
 
 def send_appliance_active_message():
     send_alert(start_message)
@@ -162,6 +178,13 @@ pushbullet_api_key = config.get('pushbullet', 'API_KEY')
 
 pushover_user_key = config.get('pushover', 'user_api_key')
 pushover_app_key = config.get('pushover', 'app_api_key')
+
+mqtt_hostname = config.get('mqtt', 'mqtt_hostname')
+mqtt_port = config.get('mqtt', 'mqtt_port')
+mqtt_topic = config.get('mqtt', 'mqtt_topic')
+mqtt_username = config.get('mqtt', 'mqtt_username')
+mqtt_password = config.get('mqtt', 'mqtt_password')
+mqtt_clientid = config.get('mqtt', 'mqtt_clientid')
 
 pushbullet_api_key2 = config.get('pushbullet', 'API_KEY2')
 start_message = config.get('main', 'START_MESSAGE')
