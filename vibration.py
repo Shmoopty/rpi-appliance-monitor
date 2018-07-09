@@ -13,18 +13,20 @@ from ConfigParser import SafeConfigParser
 from tweepy import OAuthHandler as TweetHandler
 from slackclient import SlackClient
 
+PUSHOVER_SOUNDS = None
+
 def mqtt(msg):
     try:
         mqtt_auth = None
         if len(mqtt_username) > 0:
             mqtt_auth = { 'username': mqtt_username, 'password': mqtt_password }
-        
+
         mqttpublish.single(mqtt_topic, msg, qos=0, retain=False, hostname=mqtt_hostname,
         port=mqtt_port, client_id=mqtt_clientid, keepalive=60, will=None, auth=mqtt_auth,
         tls=None)
     except (KeyboardInterrupt, SystemExit):
         raise
-    except:  
+    except:
         pass
 
 def pushbullet(cfg, msg):
@@ -40,9 +42,37 @@ def pushbullet(cfg, msg):
     except:
         pass
 
-def pushover(user_key, app_key, msg):
+def get_pushoversounds(app_key):
+    global PUSHOVER_SOUNDS
+
+    if not PUSHOVER_SOUNDS:
+        url_data = "https://api.pushover.net/1/sounds.json?token={}" .format(app_key)
+
+        try:
+            r = requests.get(url_data)
+            json_data = r.json()
+            PUSHOVER_SOUNDS = json_data['sounds']
+        except (KeyboardInterrupt, SystemExit):
+            raise
+        except:
+            pass
+
+
+def pushover(user_key, app_key, msg, device='', sound=''):
+    global PUSHOVER_SOUNDS
+
+    if not PUSHOVER_SOUNDS:
+        get_pushoversounds(app_key)
+
+    data_send = {"user": user_key, "token": app_key, "message": msg}
+
+    if device:
+        data_send['device'] = device
+
+    if sound in PUSHOVER_SOUNDS:
+        data_send['sound'] = sound
+
     try:
-        data_send = {"user": user_key, "token": app_key, "message": msg}
         requests.post(
             'https://api.pushover.net/1/messages.json',
             data=json.dumps(data_send),
@@ -106,7 +136,7 @@ def send_alert(message):
     if len(message) > 1:
         print message
         if len(pushover_user_key) > 0 and len(pushover_app_key) > 0:
-            pushover(pushover_user_key, pushover_app_key, message)
+            pushover(pushover_user_key, pushover_app_key, message, pushover_device, pushover_sound)
         if len(pushbullet_api_key) > 0:
             pushbullet(pushbullet_api_key, message)
         if len(pushbullet_api_key2) > 0:
@@ -120,7 +150,7 @@ def send_alert(message):
         if len(iftt_maker_channel_key) > 0:
             iftt(message)
         if len(mqtt_topic) > 0:
-            mqtt(message) 
+            mqtt(message)
 
 def send_appliance_active_message():
     send_alert(start_message)
@@ -178,6 +208,8 @@ pushbullet_api_key = config.get('pushbullet', 'API_KEY')
 
 pushover_user_key = config.get('pushover', 'user_api_key')
 pushover_app_key = config.get('pushover', 'app_api_key')
+pushover_device  = config.get('pushover', 'device')
+pushover_sound   = config.get('pushover', 'sound')
 
 mqtt_hostname = config.get('mqtt', 'mqtt_hostname')
 mqtt_port = config.get('mqtt', 'mqtt_port')
@@ -209,4 +241,5 @@ GPIO.add_event_callback(sensor_pin, vibrated)
 print 'Running config file {} monitoring GPIO pin {}'\
       .format(sys.argv[1], str(sensor_pin))
 threading.Timer(1, heartbeat).start()
+
 
