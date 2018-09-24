@@ -31,7 +31,7 @@ def mqtt(msg):
 
 def pushbullet(cfg, msg):
     try:
-        data_send = {"type": "note", "title": "VibrationBot", "body": msg}
+        data_send = {"type": "note", "body": msg}
         requests.post(
             'https://api.pushbullet.com/v2/pushes',
             data=json.dumps(data_send),
