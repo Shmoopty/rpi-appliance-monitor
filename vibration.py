@@ -191,6 +191,8 @@ def heartbeat():
     threading.Timer(1, heartbeat).start()
 
 
+logging.basicConfig(format='%(message)s', level=logging.INFO)
+
 if len(sys.argv) == 1:
     logging.critical("No config file specified")
     sys.exit()
@@ -232,7 +234,6 @@ slack_webhook = config.get('slack','webhook_url')
 iftt_maker_channel_event = config.get('iftt','maker_channel_event')
 iftt_maker_channel_key = config.get('iftt','maker_channel_key')
 
-logging.basicConfig(format='%(message)s', level=logging.INFO)
 if verbose:
     logging.getLogger().setLevel(logging.DEBUG)
 
