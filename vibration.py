@@ -1,5 +1,6 @@
 import sys
 import time
+import logging
 import threading
 import RPi.GPIO as GPIO
 import requests
@@ -134,7 +135,7 @@ def slack(msg):
 
 def send_alert(message):
     if len(message) > 1:
-        print message
+        logging.info(message)
         if len(pushover_user_key) > 0 and len(pushover_app_key) > 0:
             pushover(pushover_user_key, pushover_app_key, message, pushover_device, pushover_sound)
         if len(pushbullet_api_key) > 0:
@@ -168,7 +169,7 @@ def vibrated(x):
     global vibrating
     global last_vibration_time
     global start_vibration_time
-    print 'Vibrated'
+    logging.debug('Vibrated')
     last_vibration_time = time.time()
     if not vibrating:
         start_vibration_time = last_vibration_time
@@ -177,7 +178,7 @@ def vibrated(x):
 
 def heartbeat():
     current_time = time.time()
-    print "HB at {}".format(current_time)
+    logging.debug("HB at {}".format(current_time))
     global vibrating
     delta_vibration = last_vibration_time - start_vibration_time
     if (vibrating and delta_vibration > begin_seconds
@@ -191,7 +192,7 @@ def heartbeat():
 
 
 if len(sys.argv) == 1:
-    print "No config file specified"
+    logging.critical("No config file specified")
     sys.exit()
 
 vibrating = False
@@ -201,6 +202,7 @@ start_vibration_time = last_vibration_time
 
 config = SafeConfigParser()
 config.read(sys.argv[1])
+verbose = config.getboolean('main', 'VERBOSE')
 sensor_pin = config.getint('main', 'SENSOR_PIN')
 begin_seconds = config.getint('main', 'SECONDS_TO_START')
 end_seconds = config.getint('main', 'SECONDS_TO_END')
@@ -230,6 +232,10 @@ slack_webhook = config.get('slack','webhook_url')
 iftt_maker_channel_event = config.get('iftt','maker_channel_event')
 iftt_maker_channel_key = config.get('iftt','maker_channel_key')
 
+logging.basicConfig(format='%(message)s', level=logging.INFO)
+if verbose:
+    logging.getLogger().setLevel(logging.DEBUG)
+
 send_alert(config.get('main', 'BOOT_MESSAGE'))
 
 GPIO.setwarnings(False)
@@ -238,8 +244,8 @@ GPIO.setup(sensor_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.add_event_detect(sensor_pin, GPIO.RISING)
 GPIO.add_event_callback(sensor_pin, vibrated)
 
-print 'Running config file {} monitoring GPIO pin {}'\
-      .format(sys.argv[1], str(sensor_pin))
+logging.info('Running config file {} monitoring GPIO pin {}'\
+      .format(sys.argv[1], str(sensor_pin)))
 threading.Timer(1, heartbeat).start()
 
 
