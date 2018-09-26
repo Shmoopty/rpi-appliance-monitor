@@ -192,7 +192,7 @@ def heartbeat():
 
 if len(sys.argv) == 1:
     print "No config file specified"
-    sys.exit()
+    sys.exit(1)
 
 vibrating = False
 appliance_active = False
