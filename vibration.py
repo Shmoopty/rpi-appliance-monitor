@@ -195,7 +195,7 @@ logging.basicConfig(format='%(message)s', level=logging.INFO)
 
 if len(sys.argv) == 1:
     logging.critical("No config file specified")
-    sys.exit()
+    sys.exit(1)
 
 vibrating = False
 appliance_active = False
