@@ -7,7 +7,6 @@ import requests
 import json
 import tweepy
 from time import localtime, strftime
-import urllib
 import paho.mqtt.publish as mqttpublish
 
 from ConfigParser import SafeConfigParser
@@ -95,12 +94,8 @@ def iftt(msg):
         pass
 
 def slack_webhook(msg):
-
     try:
-        payload = urllib.urlencode({'payload': '{"text": "' + msg+ '"}'})
-        headers = {"Content-type": "application/x-www-form-urlencoded", "Accept": "text/plain"}
-        response = requests.request("POST", slack_webhook , data=payload, headers=headers)
-
+        requests.post(slack_webhook_url, json={'text': msg}, headers={"Content-type": "application/json"})
     except (KeyboardInterrupt, SystemExit):
         raise
     except:
@@ -146,7 +141,7 @@ def send_alert(message):
             tweet(message)
         if len(slack_api_token) > 0:
             slack(message)
-        if len (slack_webhook) > 0:
+        if len (slack_webhook_url) > 0:
             slack_webhook(message)
         if len(iftt_maker_channel_key) > 0:
             iftt(message)
@@ -230,7 +225,7 @@ twitter_api_secret = config.get('twitter', 'api_secret')
 twitter_access_token = config.get('twitter', 'access_token')
 twitter_access_token_secret = config.get('twitter', 'access_token_secret')
 slack_api_token = config.get('slack', 'api_token')
-slack_webhook = config.get('slack','webhook_url')
+slack_webhook_url = config.get('slack','webhook_url')
 iftt_maker_channel_event = config.get('iftt','maker_channel_event')
 iftt_maker_channel_key = config.get('iftt','maker_channel_key')
 
@@ -248,5 +243,4 @@ GPIO.add_event_callback(sensor_pin, vibrated)
 logging.info('Running config file {} monitoring GPIO pin {}'\
       .format(sys.argv[1], str(sensor_pin)))
 threading.Timer(1, heartbeat).start()
-
 
