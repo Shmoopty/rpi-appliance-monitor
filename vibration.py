@@ -29,8 +29,7 @@ def email(msg):
 
         message_alternative = MIMEMultipart('alternative')
         message.attach(message_alternative)
-        message_text = MIMEText('{}\n {}'.format(email_message_text,
-                                                 email_message_data))
+        message_text = MIMEText('{}\n {}'.format(msg))
 
         message_text = MIMEText('<h3>{}</h3>'.format(msg))
 
@@ -263,7 +262,7 @@ slack_api_token = config.get('slack', 'api_token')
 slack_webhook_url = config.get('slack','webhook_url')
 iftt_maker_channel_event = config.get('iftt','maker_channel_event')
 iftt_maker_channel_key = config.get('iftt','maker_channel_key')
-email_recipient = cofig.get('email', 'recipient')
+email_recipient = config.get('email', 'recipient')
 email_sender = config.get('email', 'sender')
 email_password = config.get('email', 'password')
 email_server = config.get('email', 'server')
