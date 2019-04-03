@@ -1,9 +1,12 @@
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 import sys
 import time
 import logging
 import threading
 import RPi.GPIO as GPIO
 import requests
+import smtplib
 import json
 import tweepy
 from time import localtime, strftime
@@ -14,6 +17,36 @@ from tweepy import OAuthHandler as TweetHandler
 from slackclient import SlackClient
 
 PUSHOVER_SOUNDS = None
+
+
+def email(msg):
+    try:
+        message = MIMEMultipart('related')
+        message['Subject'] = msg
+        message['From'] = email_sender
+        message['To'] = email_recipient
+        message.preamble = 'This is a multi=part message in MIME format.'
+
+        message_alternative = MIMEMultipart('alternative')
+        message.attach(message_alternative)
+        message_text = MIMEText('{}\n {}'.format(email_message_text,
+                                                 email_message_data))
+
+        message_text = MIMEText('<h3>{}</h3>'.format(msg))
+
+        message_text.replace_header('Content-Type', 'text/html')
+        message_alternative.attach(msg)
+
+        s = smtplib.SMTP(email_server, email_port)
+        s.starttls()
+        s.login(email_sender, email_password)
+        s.sendmail(email_sender, email_recipient, message.as_string())
+        s.quit()
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except:
+        pass
+
 
 def mqtt(msg):
     try:
@@ -147,6 +180,8 @@ def send_alert(message):
             iftt(message)
         if len(mqtt_topic) > 0:
             mqtt(message)
+        if len(email_recipient > 0:
+            email(message)
 
 def send_appliance_active_message():
     send_alert(start_message)
@@ -228,6 +263,11 @@ slack_api_token = config.get('slack', 'api_token')
 slack_webhook_url = config.get('slack','webhook_url')
 iftt_maker_channel_event = config.get('iftt','maker_channel_event')
 iftt_maker_channel_key = config.get('iftt','maker_channel_key')
+email_recipient = cofig.get('email', 'recipient')
+email_sender = config.get('email', 'sender')
+email_password = config.get('email', 'password')
+email_server = config.get('email', 'server')
+email_port = config.get('email', 'port')
 
 if verbose:
     logging.getLogger().setLevel(logging.DEBUG)
