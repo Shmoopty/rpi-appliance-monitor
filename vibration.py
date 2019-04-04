@@ -29,12 +29,12 @@ def email(msg):
 
         message_alternative = MIMEMultipart('alternative')
         message.attach(message_alternative)
-        message_text = MIMEText('{}\n {}'.format(msg))
+        message_text = MIMEText(msg + '\n')
 
-        message_text = MIMEText('<h3>{}</h3>'.format(msg))
+        message_text = MIMEText('<h3>' + msg + '</h3>')
 
         message_text.replace_header('Content-Type', 'text/html')
-        message_alternative.attach(msg)
+        message_alternative.attach(message_text)
 
         s = smtplib.SMTP(email_server, email_port)
         s.starttls()
