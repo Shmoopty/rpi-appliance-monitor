@@ -85,16 +85,17 @@ Set the timezone to make sure timestamps are correct
 
 Create the program file [`/home/pi/vibration.py`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration.py) (Click to view)
 
-Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration_settings.ini).  This file specifies what sensor pin to monitor, what messages you want, and what services to send the message to. 
+Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/vibration_settings.ini).  This file specifies what sensor pin to monitor, what messages you want, and what services to send the message to.
 
 > Multiple sensor expert mode: Create additional settings files with their own timings, messages, and unique sensor pins.  One for each sensor.
 
 * If you want PushBullet notifications, [create a PushBullet Access Token key here](https://www.pushbullet.com/#settings/account)
-* If you want Twitter notifications, [create Twitter API keys here](http://nodotcom.org/python-twitter-tutorial.html) (Steps 1-4): 
+* If you want Twitter notifications, [create Twitter API keys here](http://nodotcom.org/python-twitter-tutorial.html) (Steps 1-4):
 * If you want Slack notifications, [create a bot user](https://api.slack.com/bot-users) **or** [create a Slack webhook](https://api.slack.com/incoming-webhooks)
 * If you want an IFTTT trigger, create a new trigger with the Maker channel and note the channel and key.
 * If you want MQTT triggers, fill in MQTT configuration under [mqtt] section.
 * If you want email notifications, fill in SMTP information under [email] section.
+* If you want Telegram bot messages, fill in your Telegram bot API key and your Telegram user ID under [telegram] section.
 
 Edit `/etc/rc.local` to make the program run when the device boots up.
 
