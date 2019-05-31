@@ -1,10 +1,10 @@
 # Raspberry Pi Appliance Monitor
 
-_Get **Tweets**, **Slack** messages, **Pushover** notifications, **PushBullet** notifications, **MQTT** notifications, or **IFTTT triggers** when "dumb" appliances begin or end their cycles_
+_Get **Tweets**, **Slack** messages, **Pushover** notifications, **PushBullet** notifications, **MQTT** notifications, **IFTTT triggers** or **Telegram** messages when "dumb" appliances begin or end their cycles_
 
 **Raspberry Pi Appliance Monitor** just sticks onto an appliance, so no damage is done, no warranties are voided.  (That makes it Landlord Safe!)
 
-Raspberry Pi Appliance Monitor makes use of the nicely sensitive 801s vibration sensor.  It will detect faint shaking and if the shaking lasts a specified amount of time, it will assume that the appliance is running. 
+Raspberry Pi Appliance Monitor makes use of the nicely sensitive 801s vibration sensor.  It will detect faint shaking and if the shaking lasts a specified amount of time, it will assume that the appliance is running.
 
 ![On Phone](https://cloud.githubusercontent.com/assets/1101856/21469770/5d91e94e-ca2b-11e6-8c9c-d28eb902aefb.jpg "On Phone")
 
