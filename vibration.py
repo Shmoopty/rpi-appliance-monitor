@@ -159,6 +159,16 @@ def slack(msg):
     except:
         pass
 
+def telegram(msg):
+    try:
+        telegram_url = "https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}".format(telegram_api_token,
+                                                                           telegram_user_id, msg)
+        resp = requests.post(telegram_url)
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except:
+        pass
+
 
 def send_alert(message):
     if len(message) > 1:
@@ -179,8 +189,11 @@ def send_alert(message):
             iftt(message)
         if len(mqtt_topic) > 0:
             mqtt(message)
-        if len(email_recipient > 0:
+        if len(email_recipient) > 0:
             email(message)
+        if len(telegram_api_token) > 0 and len(telegram_user_id) > 0:
+            telegram(message)
+
 
 def send_appliance_active_message():
     send_alert(start_message)
@@ -267,6 +280,8 @@ email_sender = config.get('email', 'sender')
 email_password = config.get('email', 'password')
 email_server = config.get('email', 'server')
 email_port = config.get('email', 'port')
+telegram_api_token = config.get('telegram', 'telegram_api_token')
+telegram_user_id = config.get('telegram', 'telegram_user_id')
 
 if verbose:
     logging.getLogger().setLevel(logging.DEBUG)
