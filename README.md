@@ -14,7 +14,7 @@ This works on clothes washers and dryers, dishwashers, garage door openers, fans
 
 * A **[Raspberry Pi Zero W](https://www.raspberrypi.org/products/raspberry-pi-zero-w/)**.  Or any Raspberry Pi.  (In the U.S., see if there's a Micro Center nearby.  They'll sell you a single Zero at cost.)
 * Any old **MicroSD card**.  2GB is plenty.
-* **WiFi**.  If you have a Raspberry Pi Zero W or Pi 3, you already have WiFi.  A Raspberry Pi A/B/2 will need a USB WiFi dongle.  My classic Pi Zero needs a dongle **and** a MicroUSB adapter.
+* **WiFi**.  If you have a Raspberry Pi Zero W or Pi 3 or Pi 4, you already have WiFi.  A Raspberry Pi A/B/2 will need a USB WiFi dongle.  My classic Pi Zero needs a dongle **and** a MicroUSB adapter.
 * An **[801s vibration sensor module](https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Dcomputers&field-keywords=801s+vibration+sensor)**   You'll want one with a **voltage** (+V), **ground** (-V), and **digital signal pin**.  Mine has an extra analog sensor pin that I'm effectively ignoring.  Pi doesn't do analog easily.
 * Any 1 amp **microUSB power source** (What most phones and tablets from the last 10 years use) 
 
@@ -24,7 +24,7 @@ This works on clothes washers and dryers, dishwashers, garage door openers, fans
 
 > *Note*: We can skip plugging the Pi into a TV and keyboard by configuring the SD card directly from your computer. If you'd rather do this directly from the booted Pi, that works too!
 
-1. [Download Raspbian Stretch Lite](https://www.raspberrypi.org/downloads/raspbian/) and image it onto an SD card 
+1. [Download Raspbian Buster Lite](https://www.raspberrypi.org/downloads/raspbian/) and image it onto an SD card 
 
 2. Mount the SD card on your computer.  There should be two partitions, a FAT32 **boot partition**, and an EXT3 **OS partition**.  On [Mac](https://osxfuse.github.io/) or [Windows](http://www.chrysocome.net/explore2fs), you may need to find a driver to see EXT3 partitions (see links).
 
