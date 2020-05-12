@@ -72,7 +72,9 @@ Your OS should now be ready to boot and automatically jump on your home network!
 
 # Step 3: Create the software
 
-After you ssh to the pi, install a few essential libraries:
+After you ssh to the pi, create the requirements file  [`/home/pi/requirements.txt`](https://raw.githubusercontent.com/Shmoopty/rpi-appliance-monitor/master/requirements.txt). 
+
+Continue to install a few essential libraries:
 
     $ sudo apt-get install python-pip
     $ sudo pip install -r requirements.txt
