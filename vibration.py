@@ -12,7 +12,7 @@ import tweepy
 from time import localtime, strftime
 import paho.mqtt.publish as mqttpublish
 
-from ConfigParser import SafeConfigParser
+from six.moves.configparser import ConfigParser
 from tweepy import OAuthHandler as TweetHandler
 from slackclient import SlackClient
 
@@ -244,7 +244,7 @@ appliance_active = False
 last_vibration_time = time.time()
 start_vibration_time = last_vibration_time
 
-config = SafeConfigParser()
+config = ConfigParser()
 config.read(sys.argv[1])
 verbose = config.getboolean('main', 'VERBOSE')
 sensor_pin = config.getint('main', 'SENSOR_PIN')
