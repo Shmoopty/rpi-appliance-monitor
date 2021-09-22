@@ -258,7 +258,7 @@ pushover_device  = config.get('pushover', 'device')
 pushover_sound   = config.get('pushover', 'sound')
 
 mqtt_hostname = config.get('mqtt', 'mqtt_hostname')
-mqtt_port = config.get('mqtt', 'mqtt_port')
+mqtt_port = config.getint('mqtt', 'mqtt_port')
 mqtt_topic = config.get('mqtt', 'mqtt_topic')
 mqtt_username = config.get('mqtt', 'mqtt_username')
 mqtt_password = config.get('mqtt', 'mqtt_password')
