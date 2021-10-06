@@ -54,7 +54,7 @@ def mqtt(msg):
             mqtt_auth = { 'username': mqtt_username, 'password': mqtt_password }
 
         mqttpublish.single(mqtt_topic, msg, qos=0, retain=False, hostname=mqtt_hostname,
-        port=mqtt_port, client_id=mqtt_clientid, keepalive=60, will=None, auth=mqtt_auth,
+        port=int(mqtt_port), client_id=mqtt_clientid, keepalive=60, will=None, auth=mqtt_auth,
         tls=None)
     except (KeyboardInterrupt, SystemExit):
         raise
@@ -258,7 +258,7 @@ pushover_device  = config.get('pushover', 'device')
 pushover_sound   = config.get('pushover', 'sound')
 
 mqtt_hostname = config.get('mqtt', 'mqtt_hostname')
-mqtt_port = config.getint('mqtt', 'mqtt_port')
+mqtt_port = config.get('mqtt', 'mqtt_port')
 mqtt_topic = config.get('mqtt', 'mqtt_topic')
 mqtt_username = config.get('mqtt', 'mqtt_username')
 mqtt_password = config.get('mqtt', 'mqtt_password')
