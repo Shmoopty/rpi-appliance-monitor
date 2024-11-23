@@ -169,6 +169,15 @@ def telegram(msg):
     except:
         pass
 
+def discord(msg):
+    try:
+        resp = requests.post(discord_webhook_url, json={"content": msg}, params={"wait": True})
+        resp.raise_for_status()
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except Exception as e:
+        logging.warning("Failed to send to Discord: %s", e)
+
 
 def send_alert(message):
     if len(message) > 1:
@@ -193,6 +202,8 @@ def send_alert(message):
             email(message)
         if len(telegram_api_token) > 0 and len(telegram_user_id) > 0:
             telegram(message)
+        if len(discord_webhook_url) > 0:
+            discord(message)
 
 
 def send_appliance_active_message():
@@ -282,6 +293,7 @@ email_server = config.get('email', 'server')
 email_port = config.get('email', 'port')
 telegram_api_token = config.get('telegram', 'telegram_api_token')
 telegram_user_id = config.get('telegram', 'telegram_user_id')
+discord_webhook_url = config.get('discord', 'discord_webhook_url')
 
 if verbose:
     logging.getLogger().setLevel(logging.DEBUG)
