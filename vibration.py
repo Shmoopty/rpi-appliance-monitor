@@ -36,8 +36,11 @@ def email(msg):
         message_text.replace_header('Content-Type', 'text/html')
         message_alternative.attach(message_text)
 
-        s = smtplib.SMTP(email_server, email_port)
-        s.starttls()
+        if email_ssl is True:
+            s = smtplib.SMTP_SSL(email_server, email_port)
+        else:
+            s = smtplib.SMTP(email_server, email_port)
+            s.starttls()
         s.login(email_sender, email_password)
         s.sendmail(email_sender, email_recipient, message.as_string())
         s.quit()
@@ -291,6 +294,7 @@ email_sender = config.get('email', 'sender')
 email_password = config.get('email', 'password')
 email_server = config.get('email', 'server')
 email_port = config.get('email', 'port')
+email_ssl = config.getboolean('email', 'ssl')
 telegram_api_token = config.get('telegram', 'telegram_api_token')
 telegram_user_id = config.get('telegram', 'telegram_user_id')
 discord_webhook_url = config.get('discord', 'discord_webhook_url')
