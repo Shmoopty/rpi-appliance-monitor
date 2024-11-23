@@ -1,6 +1,6 @@
 [Unit]
 Description=Raspberry PI Appliance Monitor for %I
-After=network.target
+After=network-online.target
 
 [Service]
 Type=simple
