@@ -99,11 +99,20 @@ Create the settings file [`/home/pi/vibration_settings.ini`](https://raw.githubu
 * If you want email notifications, fill in SMTP information under [email] section.
 * If you want Telegram bot messages, fill in your Telegram bot API key and your Telegram user ID under [telegram] section.
 
+
+## Simple Install
 Edit `/etc/rc.local` to make the program run when the device boots up.
 
 Add before the `exit` line:
 
     python /home/pi/vibration.py /home/pi/vibration_settings.ini &
+
+## Advanced Install
+If you want to manage multiple sensors, or track the script as a systemd service,
+a service file has been provided.
+
+    sudo cp /home/pi/rpi-appliance-monitor@.service /etc/systemd/system
+    sudo systemctl enable --now rpi-appliance-monitor@vibration_settings
 
 > Multiple sensor expert mode: Add and additional line for each additional sensor. One for each of the settings files you created.
 
