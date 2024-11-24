@@ -1,5 +1,3 @@
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 import sys
 import time
 import logging
@@ -8,13 +6,27 @@ import RPi.GPIO as GPIO
 import requests
 import smtplib
 import json
-import tweepy
-from time import localtime, strftime
-import paho.mqtt.publish as mqttpublish
 
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from time import localtime, strftime
 from six.moves.configparser import ConfigParser
-from tweepy import OAuthHandler as TweetHandler
-from slackclient import SlackClient
+
+try:
+    import tweepy
+    from tweepy import OAuthHandler as TweetHandler
+except ModuleNotFoundError:
+    TweetHandler = None
+
+try:
+    import paho.mqtt.publish as mqttpublish
+except ModuleNotFoundError:
+    mqttpublish = None
+
+try:
+    from slackclient import SlackClient
+except ModuleNotFoundError:
+    SlackClient = None
 
 PUSHOVER_SOUNDS = None
 
@@ -278,23 +290,40 @@ mqtt_username = config.get('mqtt', 'mqtt_username')
 mqtt_password = config.get('mqtt', 'mqtt_password')
 mqtt_clientid = config.get('mqtt', 'mqtt_clientid')
 
+if len(mqtt_topic) > 0 and mqttpublish is None:
+    logging.critical("MQTT requested but not installed")
+    sys.exit(1)
+
 pushbullet_api_key2 = config.get('pushbullet', 'API_KEY2')
 start_message = config.get('main', 'START_MESSAGE')
 end_message = config.get('main', 'END_MESSAGE')
+
 twitter_api_key = config.get('twitter', 'api_key')
 twitter_api_secret = config.get('twitter', 'api_secret')
 twitter_access_token = config.get('twitter', 'access_token')
 twitter_access_token_secret = config.get('twitter', 'access_token_secret')
+
+if len(twitter_api_key) > 0 and TweetHandler is None:
+    logging.critical("Twitter requested but not installed")
+    sys.exit(1)
+
 slack_api_token = config.get('slack', 'api_token')
 slack_webhook_url = config.get('slack','webhook_url')
+
+if (len(slack_api_token) > 0 or len(slack_webhook_url) > 0) and SlackClient is None:
+    logging.critical("Slack requested but not installed")
+    sys.exit(1)
+
 iftt_maker_channel_event = config.get('iftt','maker_channel_event')
 iftt_maker_channel_key = config.get('iftt','maker_channel_key')
+
 email_recipient = config.get('email', 'recipient')
 email_sender = config.get('email', 'sender')
 email_password = config.get('email', 'password')
 email_server = config.get('email', 'server')
 email_port = config.get('email', 'port')
 email_ssl = config.getboolean('email', 'ssl')
+
 telegram_api_token = config.get('telegram', 'telegram_api_token')
 telegram_user_id = config.get('telegram', 'telegram_user_id')
 discord_webhook_url = config.get('discord', 'discord_webhook_url')
