@@ -1,0 +1,15 @@
+[Unit]
+Description=Raspberry PI Appliance Monitor for %I
+After=network-online.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/rpi-appliance-monitor
+ExecStart=/usr/bin/python3 vibration.py %I.ini
+
+[Install]
+WantedBy=multi-user.target
